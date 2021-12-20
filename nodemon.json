@@ -1,0 +1,9 @@
+{
+  "env": {
+    "MONGO_USER": "username",
+    "MONGO_PASSWORD": "password",
+    "MONGO_DEFAULT_DATABASE": "db",
+    "PORT": "3400",
+    "NODE_ENV": "development"
+  }
+}
