@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@testcluster0-jbawq.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@firansefood-0.4jnwl.mongodb.net/afri-ticket?retryWrites=true&w=majority`;
+
 const connectDB = async () => {
   await mongoose
     .connect(uri, {
@@ -18,4 +19,4 @@ const connectDB = async () => {
     });
 };
 
-module.exports = connectDB;
+module.exports = { connectDB };

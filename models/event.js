@@ -1,77 +1,58 @@
 const mongoose = require("mongoose");
+const paginate = require("mongoose-paginate-v2");
 
-/// Basic details of a user, you can add more
-const userSchema = new mongoose.Schema(
-  {
-    firstname: {
-      type: String,
-      required: [true, "Please tell us your first name!"],
-    },
-    lastname: {
-      type: String,
-      required: [true, "Please tell us your last name!"],
-    },
-    email: {
-      type: String,
-      required: [true, "Please provide your email"],
-      unique: true,
-      lowercase: true,
-    },
-    phone: {
-      type: String,
-      required: [true, "Please provide your phone number"],
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Please provide a password"],
-      minlength: 8,
-      select: false,
-    },
-    balance: {
-      type: Number,
-      default: 0,
-      min: 0,
-    },
-    date_of_birth: {
-      type: Date,
-    },
-    gender: {
-      type: String,
-    },
-    address: {
-      type: String,
-    },
-    pin: {
-      type: String,
-      select: false,
-      default: "",
-    },
-    security_question: {
-      type: String,
-    },
-    security_answer: {
-      type: String,
-    },
-    is_active: {
-      type: Boolean,
-      default: false,
-    },
-    password_changed_at: {
-      type: Date,
-      select: false,
-    },
-    password_reset_token: {
-      type: String,
-      select: false,
-    },
-    password_reset_expires: Date,
+const eventSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
-  {
-    timestamps: true,
+  title: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: Object,
+    default: {}
+  },
+  is_free: {
+    type: Boolean,
+    default: false,
+  },
+  price_tag: [{
+    name: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
+    },
+    number_of_tickets: {
+      type: Number
+    },
+  }],
+  address: {
+    type: String,
+    required: true
+  },
+  social_media: {
+    type: [Object],
+    required: false
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    required: true
   }
-);
+}, {
+  timestamps: true,
+});
 
-const User = mongoose.model("User", userSchema);
+eventSchema.plugin(paginate);
 
-module.exports = User;
+const Event = mongoose.model("Event", eventSchema);
+
+module.exports = Event;

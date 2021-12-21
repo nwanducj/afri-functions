@@ -16,32 +16,13 @@ const apicache = require('apicache');
 let cache = apicache.middleware;
 
 // user routes import
-const userRoutes = require("./routes/user/user");
-const authRoutes = require("./routes/user/auth");
-const notificationRoutes = require("./routes/user/notification");
-
-//order routes import
-const orderRoutes = require("./routes/order/order");
-
-//transaction routes
-// const transactionRoutes = require("./routes/transactions/transactions");
-
-// food routes
-const foodRoutes = require("./routes/food/food");
-
-//Business routes import
-const businessRoutes = require("./routes/business/business");
-const advertRoutes = require("./routes/business/advert");
-const bankAccountRoutes = require("./routes/business/bankAccount");
-const walletRoutes = require("./routes/business/wallet");
-const voucherRoutes = require("./routes/business/voucher");
-
+const eventRoutes = require("./routes/events");
 
 dotenv.config({
     path: "config.env"
 });
 
-// app.use(cache('5 minutes'));
+app.use(cache('5 minutes'));
 app.use(cors());
 
 process.on("uncaughtException", (err) => {
@@ -75,23 +56,7 @@ app.all("/*", function (req, res, next) {
 app.use("", myServer);
 
 // user routes
-app.use("/api/user", userRoutes);
-app.use("/api/user/auth", authRoutes);
-app.use("/api/user/notification", notificationRoutes);
-
-
-// order routes
-app.use("/api/order", orderRoutes);
-
-//food routes
-app.use("/api/food", foodRoutes);
-
-//business routes
-app.use("/api/business", businessRoutes);
-app.use("/api/business/advert", advertRoutes);
-app.use("/api/business/bank-account", bankAccountRoutes);
-app.use("/api/business/wallet", walletRoutes);
-app.use("/api/business/voucher", voucherRoutes);
+app.use("/api/events", eventRoutes);
 
 
 // create a write stream (in append mode)
