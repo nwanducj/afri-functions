@@ -10,17 +10,11 @@ exports.getEvents = async (req, res) => {
         let query = {};
         let sort = {}
 
-        if (req.query.name) {
-            query.name = {
-                $regex: req.query.name,
-                $options: "i",
-            };
-        }
 
         sort.createdAt = -1
 
         let page = req.query.page ? req.query.page : 1;
-        let count = req.query.count ? req.query.count : 15;
+        let count = req.query.count ? req.query.count : 6;
 
         const events = await Event.paginate(query, {
             limit: count,
@@ -32,8 +26,8 @@ exports.getEvents = async (req, res) => {
             error: false,
             message: "Event Retrieved Successfully!",
             data: {
-                events,
-            },
+                events
+            }
         })
     } catch (e) {
         logger.error("🔥 error: %o", e);
@@ -52,7 +46,7 @@ exports.getEventById = async (req, res) => {
             error: false,
             message: "Event Retrieved Successfully!",
             data: {
-                event,
+                event
             },
         })
     } catch (e) {

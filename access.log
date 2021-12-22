@@ -1,0 +1,2 @@
+::1 - - [21/Dec/2021:12:56:17 +0000] "GET /api/get-events HTTP/1.1" 404 153 "-" "PostmanRuntime/7.28.4"
+::1 - - [21/Dec/2021:19:03:57 +0000] "GET /api/get-event?id=61c22436ab486e09e4dbb102 HTTP/1.1" 404 152 "-" "PostmanRuntime/7.28.4"
